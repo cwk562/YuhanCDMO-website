@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    .container {
+      position: relative;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .image.right {
+      clip-path: inset(0 0 0 50%); /* Initial split: show half right */
+      transition: clip-path 0s;
+    }
+
+    .slider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: red;
+      cursor: ew-resize;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="sliderContainer">
+  <img src="English Yuhan Site.png" class="image left" />
+  <img src="Korean Yuhan Site.png" class="image right" id="rightImage" />
+  <div class="slider" id="slider" style="left: 50%;"></div>
+</div>
+
+<script>
+  const container = document.getElementById('sliderContainer');
+  const slider = document.getElementById('slider');
+  const rightImage = document.getElementById('rightImage');
+
+  let isDragging = false;
+
+  slider.addEventListener('mousedown', () => isDragging = true);
+  document.addEventListener('mouseup', () => isDragging = false);
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const rect = container.getBoundingClientRect();
+    let offsetX = e.clientX - rect.left;
+    offsetX = Math.max(0, Math.min(offsetX, rect.width));
+
+    const percent = (offsetX / rect.width) * 100;
+    slider.style.left = percent + '%';
+    rightImage.style.clipPath = `inset(0 0 0 ${percent}%)`;
+  });
+</script>
+
+</body>
+</html>
