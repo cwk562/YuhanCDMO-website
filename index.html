@@ -3,12 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Comparison Slider</title>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+
     .container {
       position: relative;
       width: 600px;
       height: 400px;
       overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
 
     .image {
@@ -21,7 +33,7 @@
     }
 
     .image.right {
-      clip-path: inset(0 0 0 50%); /* Initial split: show half right */
+      clip-path: inset(0 0 0 50%);
       transition: clip-path 0s;
     }
 
@@ -29,8 +41,8 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 4px;
-      background: red;
+      width: 2.5px;
+      background: black;
       cursor: ew-resize;
       z-index: 2;
     }
@@ -39,8 +51,8 @@
 <body>
 
 <div class="container" id="sliderContainer">
-  <img src="English Yuhan Site.png" class="image left" />
-  <img src="Korean Yuhan Site.png" class="image right" id="rightImage" />
+  <img src="C:\Users\240175\Desktop\Project\CDMO Website Redesign\Reference Images\Korean Yuhan Site.png" class="image left" />
+  <img src="C:\Users\240175\Desktop\Project\CDMO Website Redesign\Reference Images\English Yuhan Site.png" class="image right" id="rightImage" />
   <div class="slider" id="slider" style="left: 50%;"></div>
 </div>
 
